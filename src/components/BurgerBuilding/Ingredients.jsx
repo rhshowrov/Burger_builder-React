@@ -1,16 +1,17 @@
-import styles from './Ingredients.module.css'
-const Ingredients = ({ number, type }) => {
-    return (
-      <div>
-        {Array.from({ length: number }, (_, index) => (
-          <div key={index}>
-            {type === 'salad' && <img src="images/salad.png" alt="Salad" />}
-            {type === 'cheese' && <img src="images/cheese.png" alt="Cheese" />}
-            {type === 'meat' && <img src="images/meat.png" alt="Meat" />}
-          </div>
-        ))}
-      </div>
-    );
-  };
-  
-  export default Ingredients;
+const Ingredients = ({ path, count }) => {
+  return (
+    <div>
+      {/* Render images based on count */}
+      {Array.from({ length: count }).map((_, index) => (
+        <img
+          className="d-flex mt-1 mb-1 flex-column"
+          key={index}
+          src={path}
+          alt="Ingredient"
+        />
+      ))}
+    </div>
+  );
+};
+
+export default Ingredients;
