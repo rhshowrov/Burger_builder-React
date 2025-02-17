@@ -15,7 +15,7 @@ const INGREDIENTS=[
     {   
         id:3,
         name:'meat',
-        price:10,
+        price:30,
         pic:"images/meat.png"
     },
     
