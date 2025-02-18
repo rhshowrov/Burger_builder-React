@@ -126,7 +126,16 @@ const BurgerBuilder = () => {
               color="primary"
               onClick={() => {
                 toggle(); // Close modal first
-                navigate("/checkout"); // Then navigate
+                navigate("/checkout", {
+                  state: {
+                    totalPrice:totalPrice,
+                    ingredients:{
+                      salad:burger.salad,
+                      cheese:burger.cheese,
+                      meat:burger.meat,
+                    },
+                  },
+                });; // Then navigate
               }}
             >
               Checkout
