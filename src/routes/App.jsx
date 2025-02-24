@@ -1,8 +1,14 @@
 import "./App.css";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import { useSelector } from "react-redux";
+
 function App() {
+  const { isAuthorized } = useSelector((store) => store.auth);
+  if (!isAuthorized) {
+    return <Navigate to="/login" replace />;
+  }
   return (
     <>
       <Header />
