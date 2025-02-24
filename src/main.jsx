@@ -8,6 +8,8 @@ import Home from "./routes/Home";
 import BurgerBuilder from "./components/BurgerBuilding/BurgerBuilder";
 import BurgerBuilderStore from "./store/store";
 import { Provider } from "react-redux";
+import CheckOut from "./components/BurgerBuilding/CheckOut";
+import Login from "./routes/Login";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,7 +23,15 @@ const router = createBrowserRouter([
         path: "/building-burger",
         element: <BurgerBuilder />,
       },
+      {
+        path: "/checkout",
+        element: <CheckOut />,
+      },
     ],
+  },
+  {
+    path:"/login",
+    element:<Login />,
   },
 ]);
 createRoot(document.getElementById("root")).render(

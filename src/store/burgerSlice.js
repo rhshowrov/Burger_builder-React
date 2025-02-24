@@ -16,7 +16,7 @@ const burgerSlice=createSlice({
     reducers:{
         addIngredients:(state,action)=>{
             const ingredient=action.payload
-            if (state[ingredient] != undefined){
+            if (state[ingredient] != undefined) {
                 state[ingredient]+=1
                 console.log("value added:",{ingredient});
                 
