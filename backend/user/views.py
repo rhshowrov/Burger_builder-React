@@ -1,13 +1,16 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,authentication_classes, permission_classes
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 # Create your views here.
 
 
 @api_view(['POST'])
+@authentication_classes([])  # Override global authentication settings
+@permission_classes([AllowAny])  # Allows anyone to access this view
 def UserView(request):
     if request.method=="POST":
         username=request.data.get('username')
