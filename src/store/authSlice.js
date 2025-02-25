@@ -6,18 +6,19 @@ export const loginUser=createAsyncThunk('api/login',
     async({username,password},{rejectWithValue})=>{
         try{
             const res= await api.post('api/user/login/',{username,password})
-            localStorage.setItem(ACCESS_TOKEN,res.data.access)
-            localStorage.setItem(REFRESH_TOKEN, res.data.refresh)
-            return res.data.access
+            console.log(res)
+            return res.data
         }catch(error){
             //no response means Network error
-            if(error.res){
-                return rejectWithValue("Network Error! Check Internet or Server Status.")
+            if (!error.response) {
+              return rejectWithValue("Network Error! Check Internet or Server Status.");
             }
-            return rejectWithValue(error.res.data)
+      
+            // If server responded with an error
+            return rejectWithValue(error.response.data);
+          }
 
         }
-    }
 )
 
 const initialState={
@@ -31,24 +32,37 @@ const authSlice =createSlice({
     name:'auth',
     initialState,
     reducers:{
+      logout:(state)=>{
+        localStorage.clear();
+        state.authStatus='Logout Successful!'
+        state.color='success'
+        state.isAuthorized=false
+      }
 
     },
     extraReducers:(builder)=>{
             builder
-              .addCase(loginUser.fulfilled,(state,action)=>{
-                state.token=action.payload;
-                state.isAuthorized=true;
-                state.loading=false;
-                state.color="success";
-                state.authStatus='Login Successfull!!'
-              })
+            .addCase(loginUser.fulfilled, (state, action) => {
+              // Set tokens in localStorage when login is successful
+              localStorage.setItem(ACCESS_TOKEN, action.payload.access);
+              localStorage.setItem(REFRESH_TOKEN, action.payload.refresh);
+
+              // Update Redux state
+              state.token = action.payload.access;
+              state.isAuthorized = true;
+              state.loading = false;
+              state.color = "success";
+              state.authStatus = 'Login Successful! Redirecting...';
+          }) 
               .addCase(loginUser.pending,(state)=>{
                 state.loading=true;
               })
               .addCase(loginUser.rejected,(state,action)=>{
                 state.loading=false;
                 state.color="danger";
-                state.authStatus=action.payload
+                console.log(action.payload.error);
+                
+                state.authStatus=action.payload.error
               })
         },
 
