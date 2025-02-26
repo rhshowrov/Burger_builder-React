@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import CheckOut from "./components/BurgerBuilding/CheckOut";
 import Login from "./routes/Login";
 import Logout from "./routes/Logout";
+import Registration from "./routes/Registration";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element:<Login />,
+  },
+  {
+    path:"/signup",
+    element:<Registration />,
   },
 ]);
 createRoot(document.getElementById("root")).render(

@@ -62,7 +62,7 @@ const Login = () => {
         </Form>
         <div className="d-flex flex-row mt-2">
           <p>Don't have an account? </p>
-          <Link to="/register">Sign Up</Link>
+          <Link to="/signup">Sign Up</Link>
         </div>
       </div>
     </div>

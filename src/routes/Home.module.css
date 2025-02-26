@@ -1,0 +1,11 @@
+.backimg{
+    background-image: url("/burgerback.jpg");
+    background-size: cover;
+    background-position: center;
+    width: auto;
+    height: 100vh;
+    border-radius: 5px;
+
+}
+
+  
