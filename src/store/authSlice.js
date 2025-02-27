@@ -29,7 +29,7 @@ export const registerUser=createAsyncThunk('/api/signup/',
       return res.data
     }
     catch(error){
-      console.log("inside Error!!");
+      console.log(error);
       if(!error.response){
         return rejectWithValue("Network Error! Check Internet or Server Status.");
       }
@@ -79,7 +79,7 @@ const authSlice =createSlice({
                 state.authStatus=action.payload
               })
               .addCase(registerUser.fulfilled, (state) => {
-                // Set tokens in localStorage when login is successful
+                // Set tokens in localStorage when signup is successful
                 localStorage.clear();
                 state.loading = false;
                 state.color = "success";
@@ -92,7 +92,7 @@ const authSlice =createSlice({
                   console.log(action.payload)
                   state.loading=false;
                   state.color="danger";
-                  state.authStatus=action.payload
+                  state.authStatus=action.payload.error
                 })
         },
 

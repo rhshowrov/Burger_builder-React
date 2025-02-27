@@ -12,6 +12,7 @@ import CheckOut from "./components/BurgerBuilding/CheckOut";
 import Login from "./routes/Login";
 import Logout from "./routes/Logout";
 import Registration from "./routes/Registration";
+import MyOrder from "./components/BurgerBuilding/MyOrder";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <CheckOut />,
+      },
+      {
+        path: "/my-order",
+        element: <MyOrder />,
       },
       {
         path: "/logout",

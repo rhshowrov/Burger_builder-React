@@ -40,7 +40,6 @@ const Registration = () => {
      
     try {
         const result = await dispatch(registerUser({ username, email, password }));
-  
         // Check if the action was successful
         if (registerUser.fulfilled.match(result)) {
             setRedirect(true);

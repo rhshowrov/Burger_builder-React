@@ -1,31 +1,66 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader } from "reactstrap";
+import { Navigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Modal,
+  ModalBody,
+  ModalHeader,
+} from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder, orderSliceAction } from "../../store/orderSlice";
+import { burgerSliceAction } from "../../store/BurgerSlice";
 
 const CheckOut = () => {
   const { state } = useLocation();
   const { totalPrice, ingredients } = state || {};
-  const navigate = useNavigate();
-  
-  const [orderPlaced, setOrderPlaced] = useState(false);
+
   const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery");
   const [address, setAddress] = useState("");
   const [mobile, setMobile] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false); // ✅ Control redirection
+
+  const { loading, status, redirect } = useSelector((store) => store.order);
+  const dispatch = useDispatch();
 
   const handleConfirm = () => {
-    setOrderPlaced(true);
-    setModalOpen(true); // Open the modal
-    setTimeout(() => {
-      setModalOpen(false);
-      navigate("/building-burger"); // Redirect after 2 seconds
-    }, 2000);
+    let orderObj = {
+      salad_count: ingredients.salad,
+      cheese_count: ingredients.cheese,
+      meat_count: ingredients.meat,
+      total_price: totalPrice,
+      delivery_address: address,
+      pay_method: paymentMethod,
+      mobile_no: mobile,
+    };
+
+    dispatch(createOrder(orderObj));
   };
+
+  // ✅ Show status message first, then redirect
+  useEffect(() => {
+    if (redirect) {
+      setModalOpen(true); // Show success message first
+
+      const timer = setTimeout(() => {
+        setModalOpen(false);
+        dispatch(burgerSliceAction.resetBurger())
+        dispatch(orderSliceAction.resetOrder());
+        setShouldRedirect(true); // Now allow redirection
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [redirect, dispatch]);
 
   return (
     <div className="d-flex flex-column align-items-center mt-2">
       {/* Checkout Title */}
-      <div className="w-25 bg-warning rounded-3  shadow">
+      <div className="w-25 bg-warning rounded-3 shadow">
         <p className="text-center fw-bold mt-2 fs-5">Checkout</p>
       </div>
 
@@ -90,15 +125,15 @@ const CheckOut = () => {
               </Input>
             </FormGroup>
 
-            {/* Button inside Delivery Details - Disabled if inputs are empty */}
+            {/* Button inside Delivery Details - Disabled if inputs are empty or loading */}
             <div className="d-flex justify-content-end">
               <Button
                 color="danger"
                 className="mt-3 fw-bold p-2"
                 onClick={handleConfirm}
-                disabled={!address || !mobile} // Disable if inputs are empty
+                disabled={!address || !mobile || loading} // ✅ Disable when loading
               >
-                Confirm Order
+                {loading ? "Processing..." : "Confirm Order"}
               </Button>
             </div>
           </Form>
@@ -109,12 +144,15 @@ const CheckOut = () => {
       <Modal isOpen={modalOpen} centered>
         <ModalHeader>Order Confirmation</ModalHeader>
         <ModalBody className="text-center">
-          ✅ <strong>Order placed successfully!</strong>
-          <p>Redirecting to burger builder...</p>
+          ✅ <strong>{status}</strong>
         </ModalBody>
       </Modal>
+
+      {/* ✅ Redirecting user after status message is shown */}
+      {shouldRedirect && <Navigate to="/" replace />}
     </div>
   );
 };
 
 export default CheckOut;
+

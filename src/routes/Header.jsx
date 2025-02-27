@@ -27,7 +27,7 @@ const Header = () => {
                 <li className="nav-item ">
                   <NavLink 
                     className="nav-link fw-bold text-black" 
-                    to="#"
+                    to="/my-order"
                   >
                     My Orders
                   </NavLink>

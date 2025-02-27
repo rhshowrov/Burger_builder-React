@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const BURGER={
-    id:1,
     top:'images/top.png',
     salad:0,
     cheese:0,
@@ -30,6 +29,11 @@ const burgerSlice=createSlice({
             }
 
         },
+        resetBurger:(state)=>{
+            state.salad=0
+            state.cheese=0
+            state.meat=0
+        }
     }
 }
 
