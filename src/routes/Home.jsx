@@ -1,7 +1,7 @@
+import styles from "./Home.module.css"
 const Home =()=>{
     return(
-        <div>
-            Burger Builder Home 
+        <div className={styles.backimg}>
         </div>
     )
 }

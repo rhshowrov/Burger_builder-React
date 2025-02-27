@@ -1,0 +1,21 @@
+.popup {
+    z-index: 1000; /* Ensure the pop-up appears above other elements */
+    min-width: 300px; /* Set a minimum width for the pop-up */
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .popup div {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+.heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: auto;
+    flex-wrap: wrap;
+}

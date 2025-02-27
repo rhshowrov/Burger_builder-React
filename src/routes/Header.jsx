@@ -2,10 +2,10 @@ import { NavLink ,Link } from 'react-router-dom';
 import styles from './Header.module.css'
 const Header = () => {
   return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-success border-bottom ">
+        <nav className="navbar navbar-expand-lg bg-warning border-bottom ">
           <div className="container">
             {/* Logo/Brand */}
-            <Link to="/">
+            <Link  to="/">
             <img
               className={styles.burger_builder_home}
               src="images/logo.png"
@@ -18,7 +18,7 @@ const Header = () => {
               <ul className="navbar-nav ms-auto ">
                 <li className="nav-item">
                   <NavLink 
-                    className="nav-link text-white" 
+                    className="nav-link fw-bold text-black" 
                     to="/building-burger"
                   >
                     Build Burger
@@ -26,10 +26,18 @@ const Header = () => {
                 </li>
                 <li className="nav-item ">
                   <NavLink 
-                    className="nav-link text-white" 
-                    to="#"
+                    className="nav-link fw-bold text-black" 
+                    to="/my-order"
                   >
                     My Orders
+                  </NavLink>
+                </li>
+                <li className="nav-item ">
+                  <NavLink 
+                    className="nav-link fw-bold text-black" 
+                    to="/logout"
+                  >
+                    Logout
                   </NavLink>
                 </li>
               </ul>

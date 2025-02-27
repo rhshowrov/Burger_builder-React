@@ -4,3 +4,8 @@
     border-radius: 5px;
 
 }
+
+a:hover{
+    text-shadow: rgb(10, 10, 230);
+    border-bottom: 3px solid rgb(9, 9, 234);
+}

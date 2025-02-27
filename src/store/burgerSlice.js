@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const BURGER={
-    id:1,
     top:'images/top.png',
     salad:0,
     cheese:0,
@@ -16,7 +15,7 @@ const burgerSlice=createSlice({
     reducers:{
         addIngredients:(state,action)=>{
             const ingredient=action.payload
-            if (state[ingredient] != undefined){
+            if (state[ingredient] != undefined) {
                 state[ingredient]+=1
                 console.log("value added:",{ingredient});
                 
@@ -30,6 +29,11 @@ const burgerSlice=createSlice({
             }
 
         },
+        resetBurger:(state)=>{
+            state.salad=0
+            state.cheese=0
+            state.meat=0
+        }
     }
 }
 
