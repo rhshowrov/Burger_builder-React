@@ -23,7 +23,7 @@ Welcome to the **Burger Builder** project! This is a full-stack web application 
 ## Demo
 
 Check out the live demo of the project on YouTube:  
-[![Burger Builder Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+[![Burger Builder Demo](https://img.youtube.com/vi/6fwx0WqFKZY/0.jpg)](https://youtu.be/6fwx0WqFKZY)
 
 ---
 
